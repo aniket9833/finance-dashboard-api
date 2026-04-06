@@ -150,6 +150,11 @@ export const validate =
       });
     }
 
-    req[source] = result.data;
+    if (source === 'query') {
+      req.parsedQuery = result.data;
+    } else {
+      req[source] = result.data;
+    }
+
     next();
   };

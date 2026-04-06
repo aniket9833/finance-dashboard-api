@@ -9,8 +9,9 @@ import {
 import { parsePagination } from '../utils/pagination.js';
 
 export const getAllUsers = asyncHandler(async (req, res) => {
-  const { page, limit, offset } = parsePagination(req.query);
-  const { role, status, search } = req.query;
+  const query = req.parsedQuery || req.query;
+  const { page, limit, offset } = parsePagination(query);
+  const { role, status, search } = query;
 
   const { rows, total } = await UserService.getAllUsers({
     limit,

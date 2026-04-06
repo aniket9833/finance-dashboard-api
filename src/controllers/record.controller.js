@@ -9,9 +9,9 @@ import {
 import { parsePagination } from '../utils/pagination.js';
 
 export const getAllRecords = asyncHandler(async (req, res) => {
-  const { page, limit, offset } = parsePagination(req.query);
-  const { type, category, date_from, date_to, search, sort_by, order } =
-    req.query;
+  const query = req.parsedQuery || req.query;
+  const { page, limit, offset } = parsePagination(query);
+  const { type, category, date_from, date_to, search, sort_by, order } = query;
 
   const { rows, total } = await RecordService.getAllRecords({
     limit,
